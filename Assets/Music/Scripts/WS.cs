@@ -1,30 +1,29 @@
 using UnityEngine;
-using FMODUnity;
-using FMOD.Studio;
-using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class WS : MonoBehaviour
 {
-    public float timer = 5f;
-    
-    public EventInstance instans;
-    public EventReference referens;
-    void Start()
+    public enum ElementalPower
     {
-        instans = RuntimeManager.CreateInstance(referens);
-        instans.start();
+        None,
+        Fire,
+        Psychic,
+        Dark,
+        Earth
     }
     
-    void Update()
+    [System.Serializable]
+    public struct CharacterInformation
     {
-        if (timer > 0)
-        {
-            timer -= Time.deltaTime;
-        }
+        public string name;
+        public float speed;
+        public int health;
+        public bool canFly;
+        public bool isCool;
+    }
 
-        if (timer <= 0f)
-        {
-            instans.stop(STOP_MODE.ALLOWFADEOUT);
-        }
-    }
+    public int[] highScores;
+    
+    public CharacterInformation characterInformation;
+    public ElementalPower elementalPower;
+    
 }
