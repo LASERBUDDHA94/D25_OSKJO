@@ -12,13 +12,14 @@ public class AudioTrigger : MonoBehaviour
     public string eventName;
     public string parameterName;
     public float value;
+    public UnityEvent actionPlus;
     //private GameObject aController = GameObject.Find("AudioController");
     
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            //onTriggered.Invoke();
+            actionPlus.Invoke();
             Debug.Log(this.gameObject.name + " triggered");
 
             if (setParameter)
@@ -41,7 +42,15 @@ public class AudioTrigger : MonoBehaviour
 
         }
     }
-    
-    
-    
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log(this.gameObject.name + "Exited");
+        }
+    }
+
+
+
 }
